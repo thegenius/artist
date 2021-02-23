@@ -1,0 +1,124 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'signing'
+}
+
+group 'com.lvonce'
+version '0.1.0' +
+        '' +
+        ''
+
+repositories {
+    maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+    mavenCentral()
+}
+
+javadoc {
+    options{
+        encoding "UTF-8"
+        charSet 'UTF-8'
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    classifier = 'sources'
+}
+
+task javadocJar(type: Jar) {
+    from javadoc
+    classifier = 'javadoc'
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId project.group
+            artifactId project.name
+            version "${version}"
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+
+            pom {
+                name = "solid"
+                description = 'solid library'
+                url = 'https://github.com/thegenius/artist'
+
+                licenses {
+                    license {
+                        name = "The Apache License, Version 2.0"
+                        url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                    }
+                }
+                developers {
+                    developer {
+                        id = "thegenius"
+                        name = "thegenius"
+                        email = "thegenius@vip.qq.com"
+                    }
+                }
+                scm {
+                    url = 'https://github.com/thegenius/artist'
+                    connection = 'scm:git:git://github.com/thegenius/artist.git'
+                    connection = 'scm:git:git://github.com/thegenius/artist.git'
+                    developerConnection = 'scm:git:ssh://git@github.com:thegenius/artist.git'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            def releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+            def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots"
+            // 如果version以SNAPSHOT结尾就会上传到快照仓库，如果不是就上传到release仓库
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+            credentials {
+                username = "${sonatypeUsername}"
+                password = "${sonatypePassword}"
+            }
+        }
+
+    }
+}
+
+signing {
+    sign publishing.publications.mavenJava
+}
+
+dependencies {
+
+    compileOnly 'org.projectlombok:lombok:1.18.2'
+    annotationProcessor 'org.projectlombok:lombok:1.18.2'
+
+
+
+
+    compile group: 'com.beust', name: 'jcommander', version: '1.78'
+//    compile group: 'com.lvonce', name: 'solid', version: '1.1.0'
+    compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.1.1'
+    compile group: 'org.jboss.resteasy', name: 'resteasy-netty4', version: '4.6.0.Final'
+    compile group: 'org.jboss.resteasy', name: 'resteasy-jackson2-provider', version: '4.6.0.Final'
+    compile group: 'org.jboss.resteasy', name: 'resteasy-guice', version: '4.6.0.Final'
+
+    compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.12.1'
+    compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-properties', version: '2.12.1'
+
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.30'
+    implementation group: 'io.github.classgraph', name: 'classgraph', version: '4.8.102'
+    implementation group: 'javax.inject', name: 'javax.inject', version: '1'
+    implementation group: 'com.baomidou', name: 'mybatis-plus', version: '3.4.2'
+    implementation group: 'com.github.pagehelper', name: 'pagehelper', version: '5.2.0'
+    implementation group: 'com.zaxxer', name: 'HikariCP', version: '4.0.1'
+    implementation group: 'com.google.inject', name: 'guice', version: '4.2.3'
+
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.2'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.2'
+
+    testImplementation group: 'com.h2database', name: 'h2', version: '1.4.200'
+    testImplementation group: 'ch.qos.logback', name: 'logback-core', version: '1.2.3'
+    testImplementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+}

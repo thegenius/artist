@@ -1,0 +1,4 @@
+prop1: hello world
+
+prop2:
+  subprop1: 'test'
