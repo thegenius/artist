@@ -5,9 +5,7 @@ plugins {
 }
 
 group 'com.lvonce'
-version '0.1.1' +
-        '' +
-        ''
+version '0.1.2'
 
 repositories {
     maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
@@ -96,7 +94,6 @@ dependencies {
 
 
     compile group: 'com.beust', name: 'jcommander', version: '1.78'
-//    compile group: 'com.lvonce', name: 'solid', version: '1.1.0'
     compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.1.1'
     compile group: 'org.jboss.resteasy', name: 'resteasy-netty4', version: '4.6.0.Final'
     compile group: 'org.jboss.resteasy', name: 'resteasy-jackson2-provider', version: '4.6.0.Final'
@@ -105,13 +102,13 @@ dependencies {
     compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.12.1'
     compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-properties', version: '2.12.1'
 
-    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.30'
-    implementation group: 'io.github.classgraph', name: 'classgraph', version: '4.8.102'
-    implementation group: 'javax.inject', name: 'javax.inject', version: '1'
-    implementation group: 'com.baomidou', name: 'mybatis-plus', version: '3.4.2'
-    implementation group: 'com.github.pagehelper', name: 'pagehelper', version: '5.2.0'
-    implementation group: 'com.zaxxer', name: 'HikariCP', version: '4.0.1'
-    implementation group: 'com.google.inject', name: 'guice', version: '4.2.3'
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.30'
+    compile group: 'io.github.classgraph', name: 'classgraph', version: '4.8.102'
+    compile group: 'javax.inject', name: 'javax.inject', version: '1'
+    compile group: 'com.baomidou', name: 'mybatis-plus', version: '3.4.2'
+    compile group: 'com.github.pagehelper', name: 'pagehelper', version: '5.2.0'
+    compile group: 'com.zaxxer', name: 'HikariCP', version: '4.0.1'
+    compile group: 'com.google.inject', name: 'guice', version: '4.2.3'
 
 
     testCompileOnly 'org.projectlombok:lombok:1.18.2'
