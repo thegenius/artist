@@ -3,6 +3,7 @@ package com.lvonce.artist.sql.mybatis;
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.github.pagehelper.PageInterceptor;
+import com.lvonce.artist.module.MapperModule;
 import org.apache.ibatis.binding.MapperRegistry;
 import org.apache.ibatis.builder.xml.XMLMapperBuilder;
 import org.apache.ibatis.mapping.Environment;
@@ -24,7 +25,7 @@ public class MybatisConfigProvider implements Provider<MultiContainer<MybatisCon
 
     private final String envId;
 
-    private final Map<String, Class<BaseMapper>> mapperClasses;
+    private final List<MapperModule.NamedMapper> mapperClasses;
 
     private final List<String> xmlMappers;
 
@@ -32,7 +33,7 @@ public class MybatisConfigProvider implements Provider<MultiContainer<MybatisCon
     public MybatisConfigProvider(
             @Named("environment.id") String envId,
             DataSourceProvider dataSourceProvider,
-            @Named("classpath-aware-mapper") Map<String, Class<BaseMapper>> mapperClasses,
+            @Named("classpath-aware-mapper") List<MapperModule.NamedMapper> mapperClasses,
             @Named("classpath-aware-xml-mapper") List<String> xmlMappers) {
         this.envId = envId;
         this.sources.addAll(dataSourceProvider.get());
@@ -49,9 +50,9 @@ public class MybatisConfigProvider implements Provider<MultiContainer<MybatisCon
             Environment environment = new Environment(envId, manager, it);
             config.setEnvironment(environment);
             MapperRegistry registry = config.getMapperRegistry();
-            mapperClasses.forEach((mapperKey, mapperClass)-> {
-                if (key.equals(mapperKey)) {
-                    registry.addMapper(mapperClass);
+            mapperClasses.forEach(namedMapper -> {
+                if (key.equals(namedMapper.getName())) {
+                    registry.addMapper(namedMapper.getMapper());
                 }
             });
             PageInterceptor interceptor = new PageInterceptor();
