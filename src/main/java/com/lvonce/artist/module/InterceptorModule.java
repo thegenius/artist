@@ -2,13 +2,10 @@ package com.lvonce.artist.module;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.matcher.AbstractMatcher;
-import com.google.inject.matcher.Matcher;
 import com.google.inject.matcher.Matchers;
 import com.lvonce.artist.annotation.SagaTransaction;
-import com.lvonce.artist.transaction.SagaTaskInterceptor;
-import com.lvonce.artist.transaction.SagaTransactionInterceptor;
-import com.lvonce.artist.transaction.SagaTransactionManager;
-import com.lvonce.artist.transaction.Task;
+import com.lvonce.artist.annotation.TccTransaction;
+import com.lvonce.artist.transaction.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Method;
@@ -29,17 +26,28 @@ public class InterceptorModule extends AbstractModule {
     @Override
     protected void configure() {
 
-
         bindInterceptor(
-                Matchers.subclassesOf(Task.class),
+                Matchers.subclassesOf(SagaTask.class),
                 new MethodNameMatcher(),
                 new SagaTaskInterceptor()
+        );
+
+        bindInterceptor(
+                Matchers.subclassesOf(TccTask.class),
+                new MethodNameMatcher(),
+                new TccTaskInterceptor()
         );
 
         bindInterceptor(
                 Matchers.any(),
                 Matchers.annotatedWith(SagaTransaction.class),
                 new SagaTransactionInterceptor()
+        );
+
+        bindInterceptor(
+                Matchers.any(),
+                Matchers.annotatedWith(TccTransaction.class),
+                new TccTransactionInterceptor()
         );
     }
 }

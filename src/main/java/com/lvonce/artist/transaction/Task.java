@@ -35,5 +35,5 @@ public interface Task<T, R> {
 
     void cancel(T command);
 
-    default void confirm(T command) { }
+    default void confirm(T command) {};
 }

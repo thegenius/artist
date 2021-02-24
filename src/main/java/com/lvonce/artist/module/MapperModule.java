@@ -7,6 +7,8 @@ import com.google.inject.Scopes;
 import com.lvonce.artist.ApplicationConfig;
 import com.lvonce.artist.sql.mybatis.MapperProvider;
 import io.github.classgraph.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.inject.Named;
@@ -20,24 +22,29 @@ import static com.lvonce.artist.module.Constant.*;
 
 
 @Slf4j
+@SuppressWarnings("rawtypes")
 public class MapperModule extends AbstractModule {
 
+    @Data
+    @AllArgsConstructor
+    public static class NamedMapper {
+        String name;
+        Class<BaseMapper> mapper;
+    }
 
-    private final ScanResult scanResult;
     private final ApplicationConfig config;
-    private final Map<String, Class<BaseMapper>> mappers = new LinkedHashMap<>();
+    private final List<NamedMapper> mappers = new ArrayList<>();
     private final List<String> xmlMappers = new ArrayList<>();
 
 
     public MapperModule(ApplicationConfig config, ScanResult scanResult) {
         this.config = config;
-        this.scanResult = scanResult;
         register(scanResult);
     }
 
     @Provides
     @Named("classpath-aware-mapper")
-    public Map<String, Class<BaseMapper>> provideMappers() {
+    public List<NamedMapper> provideMappers() {
         return mappers;
     }
 
@@ -64,7 +71,8 @@ public class MapperModule extends AbstractModule {
             String env = (String) values.getValue("value");
             if (isActive(env)) {
                 Class<BaseMapper> mapperClass = classInfo.loadClass(BaseMapper.class);
-                mappers.put(name, mapperClass);
+                NamedMapper namedMapper = new NamedMapper(name, mapperClass);
+                mappers.add(namedMapper);
             }
         }
     }
@@ -102,6 +110,6 @@ public class MapperModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        mappers.forEach(this::bindMapper);
+        mappers.forEach(it-> bindMapper(it.name, it.mapper));
     }
 }

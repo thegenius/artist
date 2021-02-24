@@ -21,12 +21,14 @@ public class ArtistApplication {
         ApplicationConfig config = configModule.getConfig();
         DataSourceModule dataSourceModule = new DataSourceModule(config, scanResult, configModule);
         MapperModule mapperModule = new MapperModule(config, scanResult);
+        InterceptorModule interceptorModule = new InterceptorModule();
 
-        ProviderModule providerModule = new ProviderModule(config, scanResult, configModule, dataSourceModule, mapperModule);
-        ConsumerModule consumerModule = new ConsumerModule(config, scanResult, configModule, dataSourceModule, mapperModule, providerModule);
-        ControllerModule controllerModule = new ControllerModule(config, scanResult, configModule, dataSourceModule, mapperModule, providerModule, consumerModule);
+        ProviderModule providerModule = new ProviderModule(config, scanResult, configModule, dataSourceModule, mapperModule, interceptorModule);
+        ConsumerModule consumerModule = new ConsumerModule(config, scanResult, configModule, dataSourceModule, mapperModule, interceptorModule, providerModule);
+        ControllerModule controllerModule = new ControllerModule(config, scanResult, configModule, dataSourceModule, mapperModule, interceptorModule, providerModule, consumerModule);
 
-        Injector injector = Guice.createInjector(configModule, dataSourceModule, mapperModule, providerModule, configModule, controllerModule);
+
+        Injector injector = Guice.createInjector(configModule, dataSourceModule, mapperModule, interceptorModule, providerModule, consumerModule, controllerModule);
 
         ResteasyDeployment deployment = new ResteasyDeploymentImpl();
         Collection<Object> providers = new ArrayList<>();

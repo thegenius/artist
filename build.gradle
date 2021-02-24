@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'com.lvonce'
-version '0.1.2'
+version '0.1.5'
 
 repositories {
     maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
@@ -89,9 +89,6 @@ dependencies {
 
     compileOnly 'org.projectlombok:lombok:1.18.2'
     annotationProcessor 'org.projectlombok:lombok:1.18.2'
-
-
-
 
     compile group: 'com.beust', name: 'jcommander', version: '1.78'
     compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.1.1'

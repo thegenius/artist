@@ -5,9 +5,7 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.lvonce.artist.annotation.SagaTransaction;
 import com.lvonce.artist.module.InterceptorModule;
-import com.lvonce.artist.transaction.SagaTransactionManager;
 
-import com.lvonce.artist.transaction.Task;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
@@ -21,7 +19,7 @@ public class SagaTransactionManagerTest {
 
     @Test(expected = RuntimeException.class)
     public void test() throws Exception {
-        SagaTransactionManager manager = SagaTransactionManager.manager.get();
+        SagaTaskManager manager = SagaTaskManager.manager.get();
         try {
             Task1 task1 = new Task1();
             Task2 task2 = new Task2();
