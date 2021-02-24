@@ -27,15 +27,15 @@ public class ArtistApplication {
         ConsumerModule consumerModule = new ConsumerModule(config, scanResult, configModule, dataSourceModule, mapperModule, interceptorModule, providerModule);
         ControllerModule controllerModule = new ControllerModule(config, scanResult, configModule, dataSourceModule, mapperModule, interceptorModule, providerModule, consumerModule);
 
-
         Injector injector = Guice.createInjector(configModule, dataSourceModule, mapperModule, interceptorModule, providerModule, consumerModule, controllerModule);
 
         ResteasyDeployment deployment = new ResteasyDeploymentImpl();
         Collection<Object> providers = new ArrayList<>();
         providers.add(injector.getInstance(JsonContextResolver.class));
+        providers.add(injector.getInstance(DefaultExceptionHandler.class));
+        providers.add(injector.getInstance(DefaultResponseFilter.class));
+
         Collection<Object> controllers = new ArrayList<>(controllerModule.provideController());
-
-
         deployment.getProviders().addAll(providers);
         deployment.getResources().addAll(controllers);
 

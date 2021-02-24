@@ -11,6 +11,7 @@ import com.lvonce.artist.util.ResourceUtil;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import ru.vyarus.guice.validator.ValidationModule;
 
 import javax.inject.Named;
 import java.util.LinkedHashSet;
@@ -84,6 +85,8 @@ public class ConfigModule extends AbstractModule {
 
     @Override
     protected void configure() {
+        install(new ValidationModule());
+
         bindConstant().annotatedWith(Names.named("env")).to(config.getEnv());
 //        bind(new TypeLiteral<List<String>>()).toInstance(config.profiles);
         bindConstant().annotatedWith(Names.named("host")).to(config.getHost());

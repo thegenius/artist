@@ -9,7 +9,7 @@ public class TaskElement<T> {
 
     public boolean confirm() {
         try {
-            task.cancel(command);
+            task.confirm(command);
             return true;
         } catch (Throwable t) {
             return false;

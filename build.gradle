@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'com.lvonce'
-version '0.1.6'
+version '0.1.12'
 
 repositories {
     maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
@@ -95,6 +95,10 @@ dependencies {
     compile group: 'org.jboss.resteasy', name: 'resteasy-netty4', version: '4.6.0.Final'
     compile group: 'org.jboss.resteasy', name: 'resteasy-jackson2-provider', version: '4.6.0.Final'
     compile group: 'org.jboss.resteasy', name: 'resteasy-guice', version: '4.6.0.Final'
+
+    compile 'ru.vyarus:guice-validator:3.0.0'
+    compile 'org.hibernate:hibernate-validator:7.0.0.Final'
+    compile 'org.glassfish:jakarta.el:4.0.1'
 
     compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.12.1'
     compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-properties', version: '2.12.1'
