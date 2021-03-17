@@ -1,5 +1,6 @@
 package com.lvonce.artist;
 
+import com.lvonce.artist.util.InstanceUtil;
 import com.lvonce.artist.util.JsonUtil;
 
 import javax.ws.rs.container.ContainerRequestContext;
@@ -11,10 +12,17 @@ import java.io.IOException;
 
 @Provider
 public class DefaultResponseFilter implements ContainerResponseFilter {
+
+
     @Override
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
         Object entity = responseContext.getEntity();
-        if (entity instanceof Response) {
+        if (InstanceUtil.isJavaxResponse(entity)) {
+            return;
+        }
+        if (InstanceUtil.isResponse(entity)) {
+            String body = JsonUtil.toJson(entity);
+            responseContext.setEntity(body);
             return;
         }
         MediaType mediaType = responseContext.getMediaType();

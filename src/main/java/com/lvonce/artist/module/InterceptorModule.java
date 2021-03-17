@@ -13,7 +13,7 @@ import java.lang.reflect.Method;
 @Slf4j
 public class InterceptorModule extends AbstractModule {
 
-    class MethodNameMatcher extends AbstractMatcher<Method> {
+    static class MethodNameMatcher extends AbstractMatcher<Method> {
         @Override
         public boolean matches(Method method) {
             if (method.isSynthetic()) {

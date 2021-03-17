@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'com.lvonce'
-version '0.1.12'
+version '0.1.17'
 
 repositories {
     maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
@@ -89,6 +89,7 @@ dependencies {
 
     compileOnly 'org.projectlombok:lombok:1.18.2'
     annotationProcessor 'org.projectlombok:lombok:1.18.2'
+    annotationProcessor group: 'org.hibernate.validator', name: 'hibernate-validator-annotation-processor', version: '7.0.1.Final'
 
     compile group: 'com.beust', name: 'jcommander', version: '1.78'
     compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.1.1'
@@ -99,6 +100,8 @@ dependencies {
     compile 'ru.vyarus:guice-validator:3.0.0'
     compile 'org.hibernate:hibernate-validator:7.0.0.Final'
     compile 'org.glassfish:jakarta.el:4.0.1'
+    compile 'net.andreinc.jbvext:jbvext:0.0.11'
+
 
     compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.12.1'
     compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-properties', version: '2.12.1'

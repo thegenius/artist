@@ -1,13 +1,15 @@
-package com.lvonce.artist.example.dal;
+package com.lvonce.artist.example.dal.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
 import com.lvonce.artist.annotation.SqlDataSource;
+import com.lvonce.artist.example.dal.entity.Person;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
-@SqlDataSource(value="local", name="h2-mem")
-@SqlDataSource(value="prod", name="mysql")
+@SqlDataSource(name="h2-mem")
+//@SqlDataSource(value="prod", name="mysql")
 public interface PersonMapper extends BaseMapper<Person> {
 
      @Select("select * from person where name = #{name}")

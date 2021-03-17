@@ -1,4 +1,4 @@
-package com.lvonce.artist.example.dal;
+package com.lvonce.artist.example.dal.entity;
 
 import lombok.Data;
 

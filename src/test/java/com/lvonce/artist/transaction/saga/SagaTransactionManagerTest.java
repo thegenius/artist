@@ -1,4 +1,4 @@
-package com.lvonce.artist.transaction;
+package com.lvonce.artist.transaction.saga;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -6,14 +6,12 @@ import com.google.inject.Injector;
 import com.lvonce.artist.annotation.SagaTransaction;
 import com.lvonce.artist.module.InterceptorModule;
 
+import com.lvonce.artist.transaction.SagaTaskManager;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 @Slf4j
 public class SagaTransactionManagerTest {
-
-
-
 
 
 

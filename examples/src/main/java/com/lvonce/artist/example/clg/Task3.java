@@ -1,12 +1,15 @@
-package com.lvonce.artist.transaction;
+package com.lvonce.artist.example.clg;
 
+
+import com.lvonce.artist.transaction.Task;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public  class Task1 implements Task<String, String> {
+public  class Task3 implements Task<String, String> {
+    
     @Override
     public String execute(String command) {
-        log.info("task1 execute");
+        log.info("task3 execute");
         return command + " result1";
     }
 
