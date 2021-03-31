@@ -1,5 +1,6 @@
 package com.lvonce.artist.transaction;
 
+import com.lvonce.artist.transaction.task.Task;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

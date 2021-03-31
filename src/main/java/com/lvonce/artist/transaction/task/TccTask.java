@@ -1,4 +1,6 @@
-package com.lvonce.artist.transaction;
+package com.lvonce.artist.transaction.task;
+
+import com.lvonce.artist.transaction.task.Task;
 
 public interface TccTask<T, R> extends Task<T, R> {
 

@@ -1,4 +1,6 @@
-package com.lvonce.artist.transaction;
+package com.lvonce.artist.transaction.mannager;
+
+import com.lvonce.artist.transaction.TaskElement;
 
 public class TccTaskManager extends TaskManager {
     public static ThreadLocal<TccTaskManager> manager = ThreadLocal.withInitial(TccTaskManager::new);

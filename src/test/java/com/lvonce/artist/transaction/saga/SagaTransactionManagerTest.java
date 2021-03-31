@@ -6,7 +6,7 @@ import com.google.inject.Injector;
 import com.lvonce.artist.annotation.SagaTransaction;
 import com.lvonce.artist.module.InterceptorModule;
 
-import com.lvonce.artist.transaction.SagaTaskManager;
+import com.lvonce.artist.transaction.mannager.SagaTaskManager;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 

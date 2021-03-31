@@ -1,7 +1,7 @@
-package com.lvonce.artist.transaction;
+package com.lvonce.artist.transaction.mannager;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import com.lvonce.artist.transaction.TaskElement;
+import com.lvonce.artist.transaction.task.Task;
 
 import java.util.ArrayList;
 import java.util.List;

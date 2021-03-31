@@ -1,6 +1,8 @@
-package com.lvonce.artist.transaction;
+package com.lvonce.artist.transaction.aop;
 
 import com.lvonce.artist.annotation.TccTransaction;
+import com.lvonce.artist.transaction.mannager.TccTaskManager;
+import com.lvonce.artist.transaction.TransactionFail;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 
@@ -16,7 +18,7 @@ public class TccTransactionInterceptor implements MethodInterceptor {
         TccTaskManager manager = TccTaskManager.manager.get();
         try {
             Object result = invocation.proceed();
-            manager.taskGroup.shouldConfirm = true;
+            manager.getTaskGroup().setShouldConfirm(true);
             manager.confirm();
             return result;
         } catch (TransactionFail fail) {

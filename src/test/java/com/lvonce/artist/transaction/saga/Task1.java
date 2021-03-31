@@ -1,6 +1,6 @@
 package com.lvonce.artist.transaction.saga;
 
-import com.lvonce.artist.transaction.Task;
+import com.lvonce.artist.transaction.task.Task;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
